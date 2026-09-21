@@ -1,30 +1,113 @@
-# Bhasha-Setu AI demo
+# Bhasha-Setu AI
 
-This demo uses a browser website. No Android or Flutter installation is needed.
+> **Live classroom translation for multilingual learning**
+
+Bhasha-Setu AI is a browser-based classroom prototype that helps a teacher
+teach in English or Telugu while students listen and read in Hindi or Telugu.
+It combines live speech recognition, translation, translated speech, subtitles,
+and direct teacher video streaming in one lightweight demo.
+
+No Android app, Flutter installation, database, or classroom account is
+required.
+
+---
+
+## ✨ What the demo can do
+
+### Teacher
+
+- Start and stop a live lecture.
+- Share microphone audio with Sarvam Saaras realtime STT.
+- Share live camera video with students through WebRTC.
+- View live original-language transcription.
+- Mute or unmute the microphone.
+- See the number and names of connected students.
+- Receive student questions translated into English.
+- Accept a named student's request to speak.
+
+### Student
+
+- Join with a name.
+- Select a preferred language:
+  - Hindi
+  - Telugu
+- Watch the teacher's live video.
+- Read translated subtitles.
+- Hear translated Bulbul speech automatically.
+- Mute or unmute translated audio.
+- Request permission to speak.
+- Ask a question in the selected language.
+
+### Supported classroom language paths
+
+| Teacher speech | Student output |
+|---|---|
+| English | Hindi |
+| English | Telugu |
+| Telugu | Hindi |
+| Telugu | Telugu |
+
+For student questions:
 
 ```text
-Browser microphone
-  -> FastAPI WebSocket
-  -> Sarvam Saaras v3 realtime STT
-  -> Sarvam Mayura v1 translation
-  -> Sarvam Bulbul v3 TTS
-  -> WebRTC teacher video + browser student subtitles and translated audio
+Student speaks Hindi or Telugu
+        ↓
+Sarvam Saaras realtime STT
+        ↓
+Sarvam Mayura translation
+        ↓
+English question shown to teacher
 ```
 
-## Structure
+---
+
+## 🎬 How it works
+
+```text
+┌─────────────────────┐
+│  Teacher browser    │
+│  microphone + video │
+└──────────┬──────────┘
+           │
+           ├── WebSocket audio ──► Sarvam Saaras v3 realtime
+           │                           │
+           │                           ▼
+           │                     Final sentence
+           │                           │
+           │                    Sarvam Mayura v1
+           │                           │
+           │                    Sarvam Bulbul v3
+           │                           │
+           │                           ▼
+           │                 Subtitle + translated WAV
+           │
+           └── WebRTC video ───────────────► Student browser
+```
+
+The Python server handles speech and signaling. Teacher video is sent directly
+to students using WebRTC; the server does not proxy or store video.
+
+---
+
+## 🧱 Project structure
 
 ```text
 .
-├── main.py
-├── requirements.txt
-├── .env.example
-└── web/index.html
+├── main.py              # FastAPI server, WebSockets, Sarvam integration
+├── requirements.txt     # Python dependencies
+├── .env.example         # Safe environment-variable template
+├── README.md
+└── web/
+    └── index.html       # Reference UI + browser microphone/camera client
 ```
 
-## Sarvam configuration
+---
 
-Create a Sarvam API key at https://dashboard.sarvam.ai, then create `.env` beside
-`main.py`:
+## 🔑 Sarvam configuration
+
+Create an API key from the [Sarvam dashboard](https://dashboard.sarvam.ai).
+
+Create a `.env` file beside `main.py`:
 
 ```env
 SARVAM_API_KEY=your_sarvam_subscription_key
@@ -32,99 +115,293 @@ SARVAM_TTS_SPEAKER=shubh
 PORT=8000
 ```
 
-The key is read only by the FastAPI process. It is never included in the
-browser code or sent to the client.
+The API key is loaded only by the FastAPI backend. It is never placed in the
+browser code or sent to students.
 
-The backend uses these current Sarvam interfaces:
+### Sarvam APIs used
 
-- Realtime STT: `wss://api.sarvam.ai/speech-to-text-realtime/ws`
-- STT model: `saaras:v3-realtime`
-- STT configuration: `language_code=auto`, `stream_type=fast`, `encoding=linear16`,
-  `sample_rate=16000`, VAD endpointing
-- Translation: `POST https://api.sarvam.ai/translate`, model `mayura:v1`
-- TTS: `POST https://api.sarvam.ai/text-to-speech`, model `bulbul:v3`,
-  24 kHz WAV output
+| Capability | Current interface |
+|---|---|
+| Realtime speech-to-text | `wss://api.sarvam.ai/speech-to-text-realtime/ws` |
+| STT model | `saaras:v3-realtime` |
+| STT language mode | `language_code=auto` |
+| STT audio format | Mono `linear16`, 16 kHz |
+| Translation | `POST https://api.sarvam.ai/translate` |
+| Translation model | `mayura:v1` |
+| Text-to-speech | `POST https://api.sarvam.ai/text-to-speech` |
+| TTS model | `bulbul:v3` |
+| TTS output | Base64-encoded WAV |
 
-## Run the backend
+---
 
-From the project directory:
+## 🚀 Quick start
+
+### 1. Open PowerShell
+
+```powershell
+cd "C:\Users\Sohan\OneDrive\Desktop\Test"
+```
+
+### 2. Install backend dependencies
 
 ```powershell
 python -m pip install -r requirements.txt
-Copy-Item .env.example .env
-# Edit .env and add SARVAM_API_KEY
-python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Check it with `http://127.0.0.1:8000/health`.
+### 3. Create your environment file
 
-## Open the website on the computer
+```powershell
+Copy-Item .env.example .env
+```
 
-Start the backend, then open:
+Open `.env` and replace the placeholder with your Sarvam API key.
+
+### 4. Start the server
+
+```powershell
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+Keep this terminal window open.
+
+### 5. Open the website
+
+On the same computer, open:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-Use one browser tab as Teacher and another tab as Student.
+The backend also exposes a health check:
 
-## Open the website on another device
+```text
+http://127.0.0.1:8000/health
+```
 
-Find the computer's local IP:
+Expected response:
+
+```json
+{
+  "status": "ok",
+  "sarvam_configured": "true"
+}
+```
+
+---
+
+## 🧪 Test with a teacher and a student
+
+### Same computer
+
+Open two browser tabs:
+
+```text
+Tab 1: Teacher
+Tab 2: Student
+```
+
+#### Teacher tab
+
+1. Select **Teacher**.
+2. Click **Start lecture**.
+3. Allow microphone and camera permissions.
+4. Keep the tab open.
+
+#### Student tab
+
+1. Select **Student**.
+2. Enter a student name.
+3. Select Hindi or Telugu.
+4. Click **Join classroom**.
+5. Confirm that the teacher video appears.
+6. Speak a complete sentence as the teacher.
+7. Pause briefly so Saaras can detect the end of the sentence.
+
+The student should receive:
+
+- Teacher video
+- Translated subtitle
+- Translated audio
+
+### Two devices on the same Wi-Fi
+
+Find the computer's local IP address:
 
 ```powershell
 ipconfig
 ```
 
-Look for an IPv4 address such as `192.168.1.20`. On the other device, open:
+Find the IPv4 address, for example:
+
+```text
+192.168.1.20
+```
+
+Open this URL on the second device:
 
 ```text
 http://192.168.1.20:8000
 ```
 
-The computer and the other device must use the same Wi-Fi network.
+The computer and the second device must be connected to the same Wi-Fi
+network.
 
-Browsers normally allow microphone access only on `localhost` or HTTPS. For
-the easiest test across devices, install `ngrok`, then run:
+---
+
+## 🔒 Recommended: use HTTPS for another device
+
+Browsers often block microphone and camera access on ordinary local network
+HTTP URLs. The simplest way to test across devices is an HTTPS tunnel.
+
+Install [ngrok](https://ngrok.com/download), then run:
 
 ```powershell
 ngrok http 8000
 ```
 
-Open the generated `https://...ngrok...` URL on both devices. This also makes
-the WebSocket use secure `wss://` automatically.
+Open the generated HTTPS URL on both devices:
 
-## Test with one teacher and one student
+```text
+https://your-subdomain.ngrok-free.app
+```
 
-1. Start the backend.
-2. Open the website in two browser tabs or two devices.
-3. In one tab/device, use **Teacher**, then **Start lecture** and allow
-   microphone access.
-4. In the other tab/device, use **Student**, choose Hindi or Telugu,
-   and tap **Connect to lecture**.
-5. Speak a complete sentence in English or Telugu and pause briefly. Saaras
-   emits a final sentence at the VAD boundary; the backend translates that
-   sentence, generates Bulbul audio, and sends subtitles plus base64 WAV audio
-   to the matching student.
-6. Tap **Stop lecture** to close the teacher's Sarvam stream.
+The page automatically selects:
 
-This intentionally supports only English/Telugu input and Hindi/Telugu student
-outputs. The in-memory classroom is for this one-teacher/one-or-more-students
-demo only; there is no authentication, persistence, Redis, or classroom
-management.
+```text
+HTTPS → secure WebSockets (wss://)
+HTTP  → normal WebSockets (ws://)
+```
 
-## Video and sync
+---
 
-The teacher camera is sent directly to students with WebRTC. The FastAPI server
-only relays WebRTC offer/answer/ICE signaling; it does not proxy or store video.
-The original microphone track is not sent as classroom audio. Each final speech
-sentence receives a `segment_id`; the translated subtitle is rendered just
-before that segment's translated Bulbul audio starts, so the video, subtitle,
-and translated audio stay aligned as a live demo.
+## 🙋 Student speaking flow
 
-Students enter a name and choose Hindi or Telugu before joining. The teacher
-sees the live connected-student count, can mute the teacher microphone, and can
-accept a named student's request to speak. After acceptance, the student's
-selected-language microphone audio is transcribed by Saaras and translated to
-English for the teacher transcript. The student can mute or unmute translated
-audio playback.
+1. Student enters a name and selects Hindi or Telugu.
+2. Student clicks **Join classroom**.
+3. Student clicks **Ask to speak**.
+4. Teacher sees the student's name and request.
+5. Teacher clicks **Allow**.
+6. Student speaks in the selected language.
+7. Sarvam transcribes and translates the question to English.
+8. The teacher sees the student's original question and English translation.
+
+The student microphone is not enabled for classroom speech until the teacher
+accepts the request.
+
+---
+
+## 🔄 Sync and media behavior
+
+### Video
+
+Teacher video uses WebRTC with browser-to-browser media delivery. FastAPI
+relays only:
+
+- WebRTC offer
+- WebRTC answer
+- ICE candidates
+
+The Python server does not store or proxy the camera stream.
+
+### Subtitles and translated audio
+
+Speech is processed sentence by sentence rather than token by token:
+
+1. Sarvam detects a speech turn.
+2. Saaras returns a final transcript.
+3. Mayura translates the sentence.
+4. Bulbul generates translated WAV audio.
+5. The student receives the subtitle and audio together.
+
+Each translated segment contains a `segment_id` so the subtitle, translation,
+and audio can be associated with the same spoken sentence.
+
+Because translation and speech synthesis require network processing, the video
+remains live while subtitles and translated audio arrive shortly afterward.
+
+---
+
+## 🛠 Troubleshooting
+
+### The page does not load
+
+Make sure Uvicorn is running:
+
+```powershell
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+Open the website through the server:
+
+```text
+http://127.0.0.1:8000
+```
+
+Do not double-click `web/index.html`.
+
+### “Cannot connect to backend”
+
+Check:
+
+- The PowerShell window running Uvicorn is still open.
+- The URL uses port `8000`.
+- The second device uses the computer's correct IP address.
+- Both devices are on the same network.
+- HTTPS is used for microphone/camera access on another device.
+- The browser is using the same website URL for Teacher and Student.
+
+### Camera or microphone does not start
+
+Check:
+
+- Browser permission was allowed.
+- The page is opened on `localhost` or HTTPS.
+- Another application is not using the camera or microphone.
+- The browser supports WebRTC and `getUserMedia`.
+
+### Student video is blank
+
+Check:
+
+- The student joined after the teacher started the lecture.
+- Camera permission was allowed on the teacher device.
+- The student page was opened through the same HTTPS tunnel when using ngrok.
+- The browser console does not show a WebRTC permission or ICE error.
+
+### No translation arrives
+
+Check:
+
+- `http://127.0.0.1:8000/health` reports `"sarvam_configured": "true"`.
+- The Sarvam API key is valid.
+- The Sarvam account has available usage.
+- The student joined before the teacher spoke.
+- The teacher paused after speaking a complete sentence.
+
+---
+
+## ⚠️ Prototype limitations
+
+This is intentionally a simple demo:
+
+- One in-memory classroom per Python process.
+- No authentication.
+- No database or persistent classroom history.
+- No Redis or horizontal scaling.
+- No classroom IDs.
+- No reconnect recovery.
+- Video depends on WebRTC network conditions.
+- A public STUN server is used for peer discovery.
+- Translation and TTS latency depends on browser, network, and API response time.
+
+For production, the next steps would be secure authentication, classroom
+session IDs, TURN servers, persistent state, rate limiting, observability, and
+server-side media/session lifecycle management.
+
+---
+
+## 📄 License and security
+
+Do not commit `.env` or expose your Sarvam API key in frontend code.
+
+The included [.env.example](./.env.example) contains placeholders only.
