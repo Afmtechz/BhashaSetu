@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bhasha-setu AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============ LANDING ============ -->
+  <section id="view-landing" class="view active">
+    <nav class="site-nav">
+      <div class="container inner">
+        <div class="brand">
+          <span class="mark">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 17c3-6 6-9 8-9s5 3 8 9" stroke-linecap="round"/><path d="M4 17h16" stroke-linecap="round"/></svg>
+          </span>
+          Bhasha-setu AI
+        </div>
+        <div class="nav-links">
+          <a href="#how-it-works">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#institutions">For institutions</a>
+        </div>
+        <div class="nav-actions">
+          <button class="btn btn-secondary" data-nav="role">Sign in</button>
+          <button class="btn btn-primary" data-nav="role">Try the demo</button>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container inner">
+        <div>
+          <h1>Teach in one language. Students learn in their own.</h1>
+          <p class="lede">Bhasha-setu AI listens to a lecture as it's spoken and delivers it back to every student as live subtitles and natural speech in their mother tongue, seconds behind the original.</p>
+          <div class="actions">
+            <button class="btn btn-primary" data-nav="role">Try the live demo</button>
+            <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+          </div>
+        </div>
+        <div class="subtitle-demo" aria-hidden="true">
+          <div class="sd-head">
+            <span class="who"><span class="live-dot"></span> Biology, Grade 10</span>
+            <span class="who">Live</span>
+          </div>
+          <div class="sd-body">
+            <div class="sd-line original">
+              <div class="tag">Teacher, spoken in English</div>
+              <div class="text">"Chlorophyll in the leaves absorbs the sunlight."</div>
+            </div>
+            <div class="sd-line translated">
+              <div class="tag">Delivered to Ravi, in Telugu</div>
+              <div class="text lang-te">"à°†à°•à±à°²à°²à±‹à°¨à°¿ à°•à±à°²à±‹à°°à±‹à°«à°¿à°²à± à°¸à±‚à°°à±à°¯à°°à°¶à±à°®à°¿à°¨à°¿ à°—à±à°°à°¹à°¿à°¸à±à°¤à±à°‚à°¦à°¿."</div>
+            </div>
+            <div class="sd-line translated">
+              <div class="tag">Delivered to Aisha, in Hindi</div>
+              <div class="text lang-hi">"à¤ªà¤¤à¥à¤¤à¤¿à¤¯à¥‹à¤‚ à¤®à¥‡à¤‚ à¤®à¥Œà¤œà¥‚à¤¦ à¤•à¥à¤²à¥‹à¤°à¥‹à¤«à¤¿à¤² à¤¸à¥‚à¤°à¥à¤¯ à¤•à¥‡ à¤ªà¥à¤°à¤•à¤¾à¤¶ à¤•à¥‹ à¤…à¤µà¤¶à¥‹à¤·à¤¿à¤¤ à¤•à¤°à¤¤à¤¾ à¤¹à¥ˆà¥¤"</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>The lecture only reaches the students who understand it</h2>
+          <p>Nearly 40% of children worldwide start school in a language different from the one spoken at home, according to UNESCO. In Indian classrooms, that mismatch shows up as lower comprehension, less participation, and higher dropout, even when the teaching itself is strong. NEP 2020 asks for mother-tongue instruction; most classrooms don't have the staff to deliver a lecture in five languages at once.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-head">
+          <h2>How it works</h2>
+          <p>One lecture, delivered in whatever language each student needs, without the teacher changing how they teach.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="num">01</div>
+            <h3>Teacher speaks</h3>
+            <p>The teacher talks normally, in their own language, code-mixing included.</p>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <h3>Speech is recognised</h3>
+            <p>Speech-to-text transcribes each sentence in real time as it's spoken.</p>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <h3>Meaning is translated</h3>
+            <p>Each sentence is translated into every language in the room, keeping technical terms accurate.</p>
+          </div>
+          <div class="step">
+            <div class="num">04</div>
+            <h3>Students receive it</h3>
+            <p>Subtitles and natural spoken audio reach each student's device, under two seconds behind.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <h2>What the platform does</h2>
+          <p>Built around one classroom session, from the first word spoken to the notes a student reviews afterward.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke-width="1.6"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+            <h3>Real-time speech capture</h3>
+            <p>Picks up the teacher's voice continuously through the class device, no extra hardware.</p>
+          </div>
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke-width="1.6"/><path d="M6 15h5M6 10h3" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+            <h3>Live subtitles</h3>
+            <p>Timestamped captions appear in each student's chosen language as the lecture happens.</p>
+          </div>
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+            <h3>Natural voice output</h3>
+            <p>Translated audio, not a flat text-to-speech read, so it's easier to follow by ear.</p>
+          </div>
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h11M4 12h16M4 18h8" stroke-linecap="round" stroke-width="1.6"/><path d="M17 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/></svg></span>
+            <h3>AI-generated notes and quizzes</h3>
+            <p>Once class ends, students get a short summary and a few review questions in their own language.</p>
+          </div>
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke-width="1.6"/><path d="M4 12h16M12 4a12 12 0 0 1 0 16 12 12 0 0 1 0-16Z" stroke-width="1.6"/></svg></span>
+            <h3>Multilingual classroom mode</h3>
+            <p>One session, many students, each one hearing and reading a different language at once.</p>
+          </div>
+          <div class="feature">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v6m0 0l-3-3m3 3l3-3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><rect x="4" y="13" width="16" height="8" rx="2" stroke-width="1.6"/></svg></span>
+            <h3>Works offline</h3>
+            <p>Local caching keeps a lecture running through a dropped connection, then syncs when it's back.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section institutions" id="institutions">
+      <div class="container inner">
+        <div>
+          <h2 style="font-size:28px; font-weight:700; letter-spacing:-0.01em;">Designed for schools with real connectivity constraints</h2>
+          <p style="margin-top:var(--s4); color:var(--muted); font-size:16px; max-width:52ch;">Rural institutions are often where the language barrier is widest and the network is weakest. Bhasha-setu AI is built to keep working through both: lectures cache locally and sync when connectivity returns, so a dropped connection doesn't mean a lost lecture.</p>
+          <p style="margin-top:var(--s4); color:var(--muted); font-size:16px; max-width:52ch;">The initial rollout targets English and Telugu, including code-mixed speech, with the architecture planned to extend across all 22 scheduled Indian languages.</p>
+        </div>
+        <div class="callouts">
+          <div class="callout">
+            <div class="value">&lt; 2 sec</div>
+            <div class="label">Target delay from spoken word to delivered translation</div>
+          </div>
+          <div class="callout">
+            <div class="value">60 students</div>
+            <div class="label">Target concurrent students per live classroom session</div>
+          </div>
+          <div class="callout">
+            <div class="value">22 languages</div>
+            <div class="label">Scheduled Indian languages the architecture is designed to reach</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container">
+        <div class="card">
+          <div>
+            <h2>See a lecture translate in real time</h2>
+            <p>Walk through the teacher and student sides of a live classroom session.</p>
+          </div>
+          <button class="btn btn-primary" data-nav="role">Try the live demo</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container inner">
+        <div>
+          <div class="brand" style="font-size:14px; margin-bottom:var(--s2);">
+            <span class="mark" style="width:22px;height:22px;">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 17c3-6 6-9 8-9s5 3 8 9" stroke-linecap="round"/><path d="M4 17h16" stroke-linecap="round"/></svg>
+            </span>
+            Bhasha-setu AI
+          </div>
+          Team Vaksetu, Annamacharya University
+        </div>
+        <div class="fmeta">
+          <span>Smart India Hackathon 2026</span>
+          <span>Problem statement SIH26042</span>
+          <span>Theme: Smart Education</span>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ============ ROLE SELECT ============ -->
+  <section id="view-role" class="view">
+    <div class="role-shell">
+      <nav class="site-nav">
+        <div class="container inner">
+          <a href="#" class="back-link" data-nav="landing">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to overview
+          </a>
+        </div>
+      </nav>
+      <main class="role-main">
+        <div class="container">
+          <div class="center-head">
+            <h1>Try the demo</h1>
+            <p>Pick a side to see how one live lecture looks from each seat in the room.</p>
+          </div>
+          <div class="role-grid">
+            <div class="card role-card">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke-width="1.6"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+              <h3>I'm a teacher</h3>
+              <p>Start a lecture and watch it translate live for two waiting students.</p>
+              <button class="btn btn-primary btn-block" data-nav="teacher">Continue as teacher</button>
+            </div>
+            <div class="card role-card">
+              <span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke-width="1.6"/><path d="M6 15h5M6 10h3" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+              <h3>I'm a student</h3>
+              <p>Join a classroom and follow the lecture in the language you pick.</p>
+              <button class="btn btn-primary btn-block" data-nav="student">Continue as student</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ============ TEACHER ============ -->
+  <section id="view-teacher" class="view">
+    <div class="app-shell">
+      <div class="app-topbar">
+        <a href="#" class="back-link" data-nav="role">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Exit
+        </a>
+        <div class="who">
+          <span class="class-name" id="teacherClassLabel">Set up classroom</span>
+        </div>
+        <div style="width:64px"></div>
+      </div>
+
+      <main class="app-main">
+        <div class="container">
+
+          <!-- Setup step -->
+          <div id="teacherSetup" class="panel-narrow">
+            <div class="center-head" style="margin-bottom:var(--s8); text-align:left;">
+              <h1 style="font-size:24px;">Set up your classroom</h1>
+              <p style="margin-top:var(--s2);">Two students are already connected for this preview and waiting to join.</p>
+            </div>
+            <div class="field">
+              <label for="className">Classroom name</label>
+              <input id="className" type="text" value="Biology, Grade 10">
+            </div>
+            <div class="field">
+              <label for="sourceLang">Language you'll teach in</label>
+              <select id="sourceLang">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+                <option value="te">Telugu</option>
+              </select>
+            </div>
+            <div class="status" id="classCodeStatus">A class code will be generated when you start.</div>
+            <button class="btn btn-primary btn-block" id="startLectureBtn">Start lecture</button>
+          </div>
+
+          <!-- Live console -->
+          <div id="teacherLive" style="display:none;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--s6); flex-wrap:wrap; gap:var(--s3);">
+              <span class="live-badge"><span class="live-dot"></span> Live, <span id="teacherTimer">00:00</span></span>
+              <button class="btn btn-secondary" id="teacherMuteBtn">Mute microphone</button><button class="btn btn-secondary" id="endLectureBtn">End lecture</button>
+            </div>
+            <div class="console-grid">
+              <div class="transcript-card card">
+                <div class="th">
+                  <h3>Live transcript</h3>
+                  <span style="font-size:12px; color:var(--muted);">Spoken in English</span>
+                </div>
+                <div class="transcript-scroll" id="teacherTranscript">
+                  <div class="empty-state">
+                    <span class="icon"><svg viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" stroke-width="1.6"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" stroke-linecap="round" stroke-width="1.6"/></svg></span>
+                    Start speaking and the transcript will appear here.
+                  </div>
+                </div>
+              </div>
+              <div class="side-stack">
+                <div class="mic-card card">
+                  <span class="mic-visual active" id="micVisual">
+                    <svg viewBox="0 0 24 24" fill="none" style="width:20px;height:20px;stroke:currentColor;stroke-width:1.6;"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6" stroke-linecap="round"/></svg>
+                  </span>
+                  <div>
+                    <div class="mic-label">Listening</div>
+                    <div class="mic-sub">Picking up your voice</div>
+                  </div>
+                </div>
+                <div class="roster-card card"><h3>Connected students, <span id="studentCount">0</span></h3><div id="studentNames" class="status">No students connected.</div></div><div class="card" style="padding:16px"><video id="teacherVideo" autoplay muted playsinline style="width:100%;border-radius:8px;background:#17191c"></video><div class="status">Your live camera preview</div></div></div></div>
+            </div>
+          </div>
+
+          <!-- Summary -->
+          <div id="teacherSummary" style="display:none;">
+            <div class="card summary-card">
+              <h2 style="font-size:22px; font-weight:700;">Lecture ended</h2>
+              <p style="color:var(--muted); margin-top:var(--s2);">Notes and a quick check have been generated for each student, in their own language.</p>
+              <div class="summary-stats">
+                <div class="summary-stat">
+                  <div class="v" id="statDuration">00:00</div>
+                  <div class="l">Duration</div>
+                </div>
+                <div class="summary-stat">
+                  <div class="v" id="statLines">0</div>
+                  <div class="l">Sentences delivered</div>
+                </div>
+                <div class="summary-stat">
+                  <div class="v" id="statStudents">0</div>
+                  <div class="l">Students reached</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-block" id="teacherRestartBtn">Set up another lecture</button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ============ STUDENT ============ -->
+  <section id="view-student" class="view">
+    <div class="app-shell">
+      <div class="app-topbar">
+        <a href="#" class="back-link" data-nav="role">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Leave
+        </a>
+        <div class="who">
+          <span class="class-name" id="studentClassLabel">Join a classroom</span>
+        </div>
+        <div class="status" id="studentStatus"></div>
+      </div>
+
+      <main class="app-main">
+        <div class="container">
+
+          <!-- Join step -->
+          <div id="studentJoin" class="panel-narrow">
+            <div class="center-head" style="margin-bottom:var(--s8); text-align:left;">
+              <h1 style="font-size:24px;">Join a lecture</h1>
+              <p style="margin-top:var(--s2);">Biology, Grade 10 is open. Pick the language you want to follow it in.</p>
+            </div>
+            <div class="field">
+              <label for="studentName">Your name</label>
+              <input id="studentName" type="text" value="Ravi">
+            </div>
+            <div class="field">
+              <label for="classCode">Class code</label>
+              <input id="classCode" type="text" placeholder="Enter your teacher's code" autocomplete="off" maxlength="12">
+            </div>
+            <div class="field">
+              <label for="studentLang">Preferred language</label>
+              <select id="studentLang">
+                <option value="te">Telugu</option>
+                <option value="hi">Hindi</option>
+              </select>
+            </div>
+            <div class="status" id="studentJoinStatus" role="status" aria-live="polite"></div>
+            <button class="btn btn-primary btn-block" id="joinClassBtn">Join classroom</button>
+          </div>
+
+          <!-- Waiting -->
+          <div id="studentWaiting" style="display:none;">
+            <div class="card waiting-card panel-narrow">
+              <span class="live-dot"></span>
+              <h3>Waiting for your teacher to start</h3>
+              <p>You'll see subtitles here the moment the lecture begins.</p>
+            </div>
+          </div>
+
+          <!-- Live subtitles -->
+          <div id="studentLive" style="display:none;">
+            <div class="card subtitle-demo">
+              <div class="subtitle-stage">
+                <video id="studentVideo" autoplay playsinline style="width:100%;border-radius:8px;background:#17191c;margin-bottom:16px"></video><div class="current-line" id="studentCurrentLine"></div><div class="student-controls"><button class="btn btn-secondary" id="studentMuteBtn">Mute audio</button><button class="btn btn-secondary" id="speakRequestBtn">Ask to speak</button></div><div class="status" id="studentSpeakStatus"></div>
+              </div>
+            </div>
+            <div class="student-controls">
+              <div class="mode-toggle">
+                <button id="modeListen" class="active">Listen</button>
+                <button id="modeRead">Read</button>
+              </div>
+            </div>
+            <div class="card history-card">
+              <h3>Earlier in this lecture</h3>
+              <div id="studentHistory"></div>
+            </div><div class="card" style="padding:16px;margin-top:16px"><h3>Student questions</h3><div id="speakRequests" class="status">No requests yet.</div></div></div></div><!-- Notes -->
+          <div id="studentNotes" style="display:none;" class="panel-narrow">
+            <div class="card notes-card">
+              <h2>Lecture notes</h2>
+              <ul class="notes-list" id="studentNotesList"></ul>
+              <h2>Quick check</h2>
+              <div class="quiz-q" id="studentQuizQ"></div>
+              <div class="quiz-options" id="studentQuizOptions"></div>
+              <div class="quiz-feedback" id="studentQuizFeedback"></div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </section>
+
+</div>
+
+
+
+
+<script src="/static/js/app.js" defer></script>
+</body>
+</html>

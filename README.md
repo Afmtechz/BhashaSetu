@@ -93,12 +93,26 @@ to students using WebRTC; the server does not proxy or store video.
 
 ```text
 .
-├── main.py              # FastAPI server, WebSockets, Sarvam integration
-├── requirements.txt     # Python dependencies
-├── .env.example         # Safe environment-variable template
-├── README.md
-└── web/
-    └── index.html       # Reference UI + browser microphone/camera client
+├── backend/
+│   └── app/
+│       ├── main.py              # FastAPI app factory
+│       ├── config.py            # Environment variables and API constants
+│       ├── hub.py               # In-memory classroom state
+│       ├── routers/
+│       │   ├── pages.py         # GET /, /health, class APIs
+│       │   ├── teacher.py       # WS /ws/teacher
+│       │   └── student.py       # WS /ws/student
+│       └── services/
+│           ├── sarvam.py        # Sarvam STT, translation, and TTS calls
+│           └── pipeline.py      # Transcript and classroom message flow
+├── static/
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/app.js
+├── main.py                      # Compatibility entrypoint
+├── requirements.txt
+├── .env.example
+└── README.md
 ```
 
 ---
@@ -159,7 +173,7 @@ Open `.env` and replace the placeholder with your Sarvam API key.
 ### 4. Start the server
 
 ```powershell
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 ```
 
 Keep this terminal window open.
@@ -186,6 +200,33 @@ Expected response:
   "sarvam_configured": "true"
 }
 ```
+
+## ☁️ Deploying with Vercel
+
+Vercel serves the browser client, but its serverless functions do not support
+long-lived WebSockets. The live Sarvam stream therefore must run on a
+WebSocket-capable host such as Railway, Render, Fly.io, or a VM.
+
+1. Deploy `main.py` with the commands below on the WebSocket host:
+
+   ```text
+   Build:  pip install -r requirements.txt
+   Start:  uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+   ```
+
+2. Set `SARVAM_API_KEY` and `SARVAM_TTS_SPEAKER` in that host's environment.
+   Do not put the Sarvam key in Vercel or browser code.
+3. Deploy this repository to Vercel with [`vercel.json`](./vercel.json).
+4. Open the Vercel URL with the backend origin in the `backend` query
+   parameter, for example:
+
+   ```text
+   https://your-app.vercel.app/?backend=https%3A%2F%2Fyour-api.example.com
+   ```
+
+The teacher clicks **Start lecture** to create a class and receives a short
+class code. Students enter that code before joining. This prevents students
+from accidentally joining a different active classroom.
 
 ---
 
@@ -328,7 +369,7 @@ remains live while subtitles and translated audio arrive shortly afterward.
 Make sure Uvicorn is running:
 
 ```powershell
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+python -m uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 ```
 
 Open the website through the server:
@@ -337,7 +378,7 @@ Open the website through the server:
 http://127.0.0.1:8000
 ```
 
-Do not double-click `web/index.html`.
+Do not double-click `static/index.html`.
 
 ### “Cannot connect to backend”
 
@@ -384,11 +425,11 @@ Check:
 
 This is intentionally a simple demo:
 
-- One in-memory classroom per Python process.
+- One in-memory active classroom per Python process (restart ends the class).
 - No authentication.
 - No database or persistent classroom history.
 - No Redis or horizontal scaling.
-- No classroom IDs.
+- No persistent classroom history or accounts.
 - No reconnect recovery.
 - Video depends on WebRTC network conditions.
 - A public STUN server is used for peer discovery.
